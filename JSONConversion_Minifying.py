@@ -236,6 +236,35 @@ class Tree:
             if Text == "" and len(Children) == 0 and len(Attributes) == 0:
                 String = "[]"
         return String
+	
+    def PrintMinifiedTree(self):
+        CurrentNode = self.Rootnode
+        String = ""
+        for i in self.IntialTags:
+            String = String + i
+        String = String + self.PrintMinifiedNode(CurrentNode)
+        return String
+        #Minified_file = open('Minified_XML.xml', 'w')
+        #Minified_file.write(String)
+        #Minified_file.close()
+
+    def PrintMinifiedNode(self, CurrentNode):
+        Attributes = CurrentNode.GetAttributes()
+        Text = CurrentNode.GetText()
+        Children = CurrentNode.GetChildren()
+        Tag = CurrentNode.GetTag()
+        String = f"<{Tag}"
+        for key, value in Attributes.items() :
+            String = String + f' {key}="{value}"'
+        if CurrentNode.GetSelfClosed() == True:
+            String = String + "/>"
+            return String
+        String = String + ">"
+        String = String + Text
+        for Child in Children:
+            String = String + self.PrintMinifiedNode(Child)
+        String = String + f"</{Tag}>"
+        return String
 
 
 def PrintJSONFile(StringFile):
