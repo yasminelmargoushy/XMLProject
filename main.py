@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QMessageBox
 # IMPORTS FUNCTIONS FROM FILES:
 from Consistency_Formatting import Formatting,ErrorDetection,Parsing,is_consistent,ErrorCorrection
 from JSONConversion_Minifying import PrintJSONFile, PrintMinifiedFile
-from Compression import PrintCompressedFile, PrintDecompressedFile, Node
+from Compression import PrintCompressedFile, PrintDecompressedFile
 
 
 # GLOBAL VARIABLES:
@@ -449,6 +449,7 @@ class Ui_MainWindow(object):
             PrintDecompressedFile(f"{File_Path}{File_Name}", f"{File_Path}Decompressed_{File_Name}.xml", Tree)
             with open(f"{File_Path}Decompressed_{File_Name}.xml", "r") as f:
                 Output_String = f.read()
+                Output_Type = "minified xml"
                 self.output_lbl.setText(Output_String)
 
     def save_handler(self):
